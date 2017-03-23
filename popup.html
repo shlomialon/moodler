@@ -3,14 +3,31 @@
 
 <head>
     <title>Moodler</title>
-    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>-->
-    <script src="popup.js"></script>
+    <script src="jquery-3.2.0.min.js"></script>
+    <style src="popup.css"></style>
 </head>
 
 <body>
     <h3>Moodler by Elad Keyshawn</h1>
-        <button id="hide_course_btn">Hide past courses</button>
+
+
+        <form id="courses_form">
+            Past courses:<br>
+            <ul id="saved_courses">
+
+            </ul>
+            <br>
+            <input id="course_input" type="text">
+            <br>
+        </form>
+
+        <button id="submit_btn">Add</button>
+
+
+        <script src="popup.js"></script>
+        <!--<script src="helper.js"></script>-->
+
+
 </body>
 
 </html>
