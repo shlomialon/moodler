@@ -1,7 +1,10 @@
 
 $(document).ready(function () {
+    $('#submit_btn').click(onAddBtnClick);
     updateCourseList();
+    setUpLinkListeners();
 })
+
 
 
 
@@ -51,6 +54,18 @@ function updateCourseList() {
 
 }
 
-document.getElementById('submit_btn').addEventListener('click', onAddBtnClick);
+function setUpLinkListeners() {
+    var links = document.getElementsByTagName("a");
+    for (var i = 0; i < links.length; i++) {
+        (function () {
+            var ln = links[i];
+            var location = ln.href;
+            ln.onclick = function () {
+                chrome.tabs.create({active: true, url: location});
+            };
+        })();
+    }
+}
+
 
 
