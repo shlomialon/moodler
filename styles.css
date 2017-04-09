@@ -1,5 +1,12 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:300,100,400);
 
+ footer {
+            width: 100%;
+            bottom: 0;
+            position: fixed;
+            padding: 5px;
+ }
+
 *{
   margin:0;
   padding:0;

@@ -95,7 +95,7 @@ function initEverything() {
             var courseName = input.val();
             event.preventDefault();
             if (courseName) {
-                createReminder(courseName.replace(/\s/g,''),courseName);
+                createReminder(courseName.replace(/\s|[.]|[:]|[-]/g,''),courseName);
                 input.val('');
             }
         });
@@ -106,7 +106,7 @@ function initEverything() {
             var items = result.courselist;
             console.debug(items);
             for (var item in items) {
-                createReminder(items[item].replace(/\s/g,''), items[item]);
+                createReminder(items[item].replace(/\s|[.]|[:]|[-]/g,''), items[item]);
             }
         });
     };
@@ -184,9 +184,6 @@ function setUpLinkListeners() {
         })();
     }
 }
-
-
-/*  logic for adding/removing items */
 
 
 
