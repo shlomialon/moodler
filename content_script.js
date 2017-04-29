@@ -22,9 +22,8 @@ $(document).ready(function () {
         }
 
         case "login/index.php": {
-            $('#username').val("315631887");
-            $('#password').val("9885");
-            $('#loginbtn').click();
+            handleLogin();
+            break;
         }
 
         default:
@@ -33,48 +32,83 @@ $(document).ready(function () {
     }
 
 
+    function handleLogin() {
+        chrome.storage.sync.get({
+            autologin: false,
+            username: "",
+            password: ""
+        }, function (items) {
+            if (items.autologin) {
+                $('#username').val(items.username);
+                $('#password').val(items.password);
+                $('#loginbtn').click();
+            }
 
-  function removeMainFrameAndCourses() {
-        //remove annoying header
-        $('.container-fluid')[0].remove();
-        $('#frontpage-ariel').remove();
+        });
 
-        //remove accesibility
-        $('#inst339474').remove();
-        $('#inst28797').remove();
-        $('#inst4').remove();
-        $('#inst227770').remove();
-        $('#block-region-side-post').remove();
-        $('#block-region-side-pre').remove();
+    }
 
-        // links to remove
-        var links = ['דילוג על הקורסים שלי'];
-        links.forEach(function (linkName) {
-            var allFitLinks = $('a').filter(function (index) { return $(this).text().includes(linkName); });
-            for (var i = 0; i < allFitLinks.length; i++) {
-                allFitLinks[i].remove();
+
+    function removeMainFrameAndCourses() {
+
+        chrome.storage.sync.get({
+            autologin: false,
+            username: "",
+            password: "",
+            hideCourses: true,
+            hideExtra: true
+        }, function (items) {
+            if (items.hideExtra) {
+                //remove annoying header
+                $('.container-fluid')[0].remove();
+                $('#frontpage-ariel').remove();
+
+                //remove accesibility
+                $('#inst339474').remove();
+                $('#inst28797').remove();
+                $('#inst4').remove();
+                $('#inst227770').remove();
+                $('#block-region-side-post').remove();
+                $('#block-region-side-pre').remove();
+
+                // links to remove
+                var links = ['דילוג על הקורסים שלי'];
+                links.forEach(function (linkName) {
+                    var allFitLinks = $('a').filter(function (index) { return $(this).text().includes(linkName); });
+                    for (var i = 0; i < allFitLinks.length; i++) {
+                        allFitLinks[i].remove();
+
+                    }
+
+                }, this);
 
             }
 
-        }, this);
+            if (items.hideCourses) {
+                var courseNames = [];
+                chrome.storage.sync.get('courselist', function (result) {
+                    courseNames = result.courselist;
+                    console.debug(courseNames);
+                    // remove courses
+                    courseNames.forEach(function (coursesName) {
+                        var allFitLinks = $('a').filter(function (index) { return $(this).text().includes(coursesName); });
+                        for (var i = 0; i < allFitLinks.length; i++) {
+                            var courseBox = allFitLinks[i].closest('.coursebox');
+                            if (courseBox != null) {
+                                courseBox.remove();
+                            }
+                        }
 
+                    }, this);
+                });
+            }
 
-        var courseNames = [];
-        chrome.storage.sync.get('courselist', function (result) {
-            courseNames = result.courselist;
-            console.debug(courseNames);
-            // remove courses
-            courseNames.forEach(function (coursesName) {
-                var allFitLinks = $('a').filter(function (index) { return $(this).text().includes(coursesName); });
-                for (var i = 0; i < allFitLinks.length; i++) {
-                    var courseBox = allFitLinks[i].closest('.coursebox');
-                    if (courseBox != null) {
-                        courseBox.remove();
-                    }
-                }
-
-            }, this);
         });
+
+
+
+
+
     }
 
 

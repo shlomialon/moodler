@@ -1,12 +1,15 @@
 
 $(document).ready(function () {
-    setUpLinkListeners();
+     setUpLinkListeners();
     initEverything();
 })
 
 
 function initEverything() {
     //saves an item to localStorage
+
+
+    
     var saveReminder = function (id) {
         var courselist = [];
 

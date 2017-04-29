@@ -11,6 +11,12 @@
         "activeTab",
         "storage"
     ],
+    "options_ui": {
+        "page":"options.html",
+         "chrome_style": true
+       
+    },
+
     "content_scripts": [
         {
             "matches": [
