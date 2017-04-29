@@ -14,8 +14,8 @@
     "content_scripts": [
         {
             "matches": [
-                "https://moodlearn.ariel.ac.il/",
-                "http://moodlearn.ariel.ac.il/"
+                "https://moodlearn.ariel.ac.il/*",
+                "http://moodlearn.ariel.ac.il/*"
             ],
             "css": [
                 "inject.css"
