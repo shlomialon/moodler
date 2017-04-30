@@ -6,7 +6,7 @@ Simple chrome extention for auto-logging moodle as well as cleaning up unused co
 Download now from [Chrome Webstore](https://chrome.google.com/webstore/search/moodler)
 
 
-Testing locally instructions:
+### Testing locally instructions:
 
 * `git clone https://github.com/EladKeyshawn/moodler.git`
 * Go to chrome://extentions
