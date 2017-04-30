@@ -1,22 +1,20 @@
-
 $(document).ready(function () {
-     setUpLinkListeners();
+    setUpLinkListeners();
     initEverything();
-})
+});
 
 
 function initEverything() {
     //saves an item to localStorage
 
 
-    
     var saveReminder = function (id) {
         var courselist = [];
 
         chrome.storage.sync.get('courselist', function (result) {
             if (result.courselist == null) {
                 courselist.push(id);
-                chrome.storage.sync.set({ 'courselist': courselist }, function () {
+                chrome.storage.sync.set({'courselist': courselist}, function () {
                     console.log('saved');
                     loadReminders();
                 });
@@ -25,7 +23,7 @@ function initEverything() {
                 if (courselist.indexOf(id) == -1) {
                     courselist.push(id);
                 }
-                chrome.storage.sync.set({ "courselist": courselist }, function () {
+                chrome.storage.sync.set({"courselist": courselist}, function () {
                     console.log('saved');
 
                     loadReminders();
@@ -37,12 +35,12 @@ function initEverything() {
     };
 
     //removes item from localStorage
-    var deleteReminder = function (id,content) {
+    var deleteReminder = function (id, content) {
         var item = $('#' + id);
         item.addClass('removed-item')
-            .one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function (e) {
-                $(this).remove();
-            });
+          .one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function (e) {
+              $(this).remove();
+          });
         var courselist = [];
         chrome.storage.sync.get('courselist', function (result) {
             if (result.courselist != null) {
@@ -52,7 +50,7 @@ function initEverything() {
                     courselist.splice(index, 1);
                 }
 
-                chrome.storage.sync.set({ 'courselist': courselist }, function () {
+                chrome.storage.sync.set({'courselist': courselist}, function () {
                     console.debug('removed');
                     loadReminders();
                 });
@@ -62,9 +60,9 @@ function initEverything() {
     };
 
 
-    var createReminder = function (id,content) {
+    var createReminder = function (id, content) {
         var courseItem = '<li id="' + id + '">' + content + '</li>',
-            list = $('.reminders li');
+          list = $('.reminders li');
 
 
         if (!$('#' + id).length) {
@@ -79,7 +77,7 @@ function initEverything() {
                 "class": "icon-trash delete-button",
                 "contenteditable": "false",
                 click: function () {
-                    deleteReminder(id,content);
+                    deleteReminder(id, content);
                 }
             }));
 
@@ -98,7 +96,7 @@ function initEverything() {
             var courseName = input.val();
             event.preventDefault();
             if (courseName) {
-                createReminder(courseName.replace(/\s|[.]|[:]|[-]/g,''),courseName);
+                createReminder(courseName.replace(/\s|[.]|[:]|[-]/g, ''), courseName);
                 input.val('');
             }
         });
@@ -109,14 +107,10 @@ function initEverything() {
             var items = result.courselist;
             console.debug(items);
             for (var item in items) {
-                createReminder(items[item].replace(/\s|[.]|[:]|[-]/g,''), items[item]);
+                createReminder(items[item].replace(/\s|[.]|[:]|[-]/g, ''), items[item]);
             }
         });
     };
-
-
-
-
 
 
     var init = function () {
@@ -142,7 +136,7 @@ function saveCourse(courseName) {
     chrome.storage.sync.get('courselist', function (result) {
         if (result.courselist == null) {
             courselist.push(courseName);
-            chrome.storage.sync.set({ 'courselist': courselist }, function () {
+            chrome.storage.sync.set({'courselist': courselist}, function () {
                 updateCourseList();
             });
         } else {
@@ -150,7 +144,7 @@ function saveCourse(courseName) {
             if (courselist.indexOf(courseName) == -1) {
                 courselist.push(courseName);
             }
-            chrome.storage.sync.set({ "courselist": courselist }, function () {
+            chrome.storage.sync.set({"courselist": courselist}, function () {
                 updateCourseList();
             });
         }
@@ -182,7 +176,7 @@ function setUpLinkListeners() {
             var ln = links[i];
             var location = ln.href;
             ln.onclick = function () {
-                chrome.tabs.create({ active: true, url: location });
+                chrome.tabs.create({active: true, url: location});
             };
         })();
     }
