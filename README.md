@@ -8,7 +8,7 @@ Download now from [Chrome Webstore](https://chrome.google.com/webstore/search/mo
 
 Testing locally instructions:
 
-*`git clone https://github.com/EladKeyshawn/moodler.git`
+* `git clone https://github.com/EladKeyshawn/moodler.git`
 * Go to chrome://extentions
 * -> Load unpacked extention and choose the cloned repo
 * Tada!
