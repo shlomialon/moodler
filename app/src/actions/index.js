@@ -3,14 +3,19 @@ import axios from "axios"
 
 export default {
 
-
     toggleLoading: on => state => ({loading: on}),
+
+    setTypeBoxValue: val => () => {
+        console.log(val);
+        return {typeBox: val}
+    },
 
     init: () => (state, actions) => {
         console.log("init app state");
         actions.loadCourses();
     },
     saveCourse: () => ({typeBox}, actions) => {
+        console.log("value typed:", typeBox);
         if (!typeBox) {
             console.error("No course was typed in!");
             return;
