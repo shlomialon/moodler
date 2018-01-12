@@ -1,26 +1,29 @@
 import {h} from "hyperapp"
 
-export default ({loading, courseList}, {init, setTypeBoxValue, saveCourse}) =>
+export default ({loading, courseList,typeBox}, {init, setTypeBoxValue, saveCourse, deleteCourse}) =>
   <div class="reminder-container" oncreate={init}>
-      {/*<form id="input-form">*/}
       <input oncreate={element => element.focus()} oninput={e => setTypeBoxValue(e.target.value)} type="text"
-             placeholder="Course name..."/>
+             placeholder="Course name..." value={typeBox}/>
       <input type="submit" value="Add" onclick={saveCourse}>Add</input>
-      {/*</form>*/}
 
       <div class="container">
           <ul class="reminders">
 
-              {console.log("Rendering courses:", courseList)}
-
               {
                   courseList.map((course, idx) => {
-                      console.log(course,idx);
-                      return <li class="new-item" id={idx}> {course} </li>
+                      return <li class="new-item" id={idx}> {course}
+
+                          <button onclick={deleteCourse.bind(null, idx)}
+                                  class="icon-trash delete-button"/>
+                      </li>
                   })
               }
 
           </ul>
+          {
+              !courseList.length ? <h3>No courses added yet.</h3> : null
+          }
+
       </div>
 
       <footer>

@@ -14,9 +14,11 @@ export default {
         console.log("init app state");
         actions.loadCourses();
     },
-    setCourseList: (list) => () => ({courseList:list}),
+
+    setCourseList: (list) => () => ({courseList: list}),
+
     saveCourse: () => ({typeBox}, actions) => {
-        console.log("value typed:", typeBox);
+        // console.log("value typed:", typeBox);
         if (!typeBox) {
             console.error("No course was typed in!");
             return;
@@ -32,12 +34,20 @@ export default {
                 actions.loadCourses();
             });
 
-        })
-    },
-    deleteCourse: () => (state, actions) => {
+        });
 
+        return {typeBox:""}
     },
-    loadCourses: () => (state,actions) => {
+
+    deleteCourse: (idx) => ({courseList}, actions) => {
+        // console.log("Deleting item idx:", idx, "value:", courseList[idx]);
+        courseList.splice(idx,1);
+        chrome.storage.sync.set({'courselist': courseList}, function () {
+            actions.loadCourses();
+        });
+    },
+
+    loadCourses: () => (state, actions) => {
         chrome.storage.sync.get('courselist', function (result) {
             const courses = result.courselist;
             console.debug(courses);
