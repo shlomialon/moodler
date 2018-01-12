@@ -3,7 +3,8 @@ import {h} from "hyperapp"
 export default ({loading, courseList, typeBox}, {init, setTypeBoxValue, saveCourse, deleteCourse}) =>
   <div class="reminder-container" oncreate={init}>
       <input oncreate={element => element.focus()} oninput={e => setTypeBoxValue(e.target.value)} type="text"
-             placeholder="Course name..." value={typeBox}/>
+             placeholder="Course name..." value={typeBox}
+             onkeyup={e => {e.keyCode === 13 ? saveCourse() : null}}/>
       <input type="submit" value="Add" onclick={saveCourse}>Add</input>
 
       <div class="container">
