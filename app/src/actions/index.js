@@ -14,6 +14,7 @@ export default {
         console.log("init app state");
         actions.loadCourses();
     },
+    setCourseList: (list) => () => ({courseList:list}),
     saveCourse: () => ({typeBox}, actions) => {
         console.log("value typed:", typeBox);
         if (!typeBox) {
@@ -36,11 +37,11 @@ export default {
     deleteCourse: () => (state, actions) => {
 
     },
-    loadCourses: () => {
+    loadCourses: () => (state,actions) => {
         chrome.storage.sync.get('courselist', function (result) {
             const courses = result.courselist;
             console.debug(courses);
-            return {coursesList: courses}
+            actions.setCourseList(courses);
         });
     }
 };

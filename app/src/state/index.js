@@ -1,7 +1,7 @@
 export default {
     typeBox: null,
     loading: false,
-    coursesList: [],
+    courseList: [],
     userCredentials: {},
     autoLogin: false,
 };
