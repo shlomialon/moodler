@@ -111,11 +111,10 @@ function initEverything() {
             var items = result.courselist;
             console.debug(items);
             for (var item in items) { 
-                createReminder(itemToDivId[items[item]], items[item]);
+                createReminder(ID(), items[item]);
             }
         });
     };
-
 
     var init = function () {
         $('#text').focus();
@@ -125,7 +124,6 @@ function initEverything() {
     //start all
     init();
 }
-
 
 function onAddBtnClick(params) {
     var typedCourse = $('#course_input').val();
@@ -161,7 +159,6 @@ function saveCourse(courseName) {
         }
     })
 }
-
 
 function updateCourseList() {
     var list = $('#saved_courses');
