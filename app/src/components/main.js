@@ -1,6 +1,6 @@
 import {h} from "hyperapp"
 
-export default ({loading, courseList,typeBox}, {init, setTypeBoxValue, saveCourse, deleteCourse}) =>
+export default ({loading, courseList, typeBox}, {init, setTypeBoxValue, saveCourse, deleteCourse}) =>
   <div class="reminder-container" oncreate={init}>
       <input oncreate={element => element.focus()} oninput={e => setTypeBoxValue(e.target.value)} type="text"
              placeholder="Course name..." value={typeBox}/>
@@ -25,12 +25,6 @@ export default ({loading, courseList,typeBox}, {init, setTypeBoxValue, saveCours
           }
 
       </div>
-
-      <footer>
-
-          <div style="font-size: small" class=""><span class="year">© 2017 </span>Elad Keyshawn</div>
-
-      </footer>
   </div>;
 
 

@@ -3,15 +3,13 @@ import axios from "axios"
 
 export default {
 
-    toggleLoading: on => state => ({loading: on}),
-
     setTypeBoxValue: val => () => {
         console.log(val);
         return {typeBox: val}
     },
 
     init: () => (state, actions) => {
-        console.log("init app state");
+        console.log("initializing app state");
         actions.loadCourses();
     },
 
@@ -36,12 +34,12 @@ export default {
 
         });
 
-        return {typeBox:""}
+        return {typeBox: ""}
     },
 
     deleteCourse: (idx) => ({courseList}, actions) => {
         // console.log("Deleting item idx:", idx, "value:", courseList[idx]);
-        courseList.splice(idx,1);
+        courseList.splice(idx, 1);
         chrome.storage.sync.set({'courselist': courseList}, function () {
             actions.loadCourses();
         });
