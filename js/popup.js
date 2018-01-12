@@ -3,6 +3,8 @@ $(document).ready(function () {
     initEverything();
 });
 
+var itemToDivId = {};
+
 
 function initEverything() {
     //saves an item to localStorage
@@ -63,7 +65,7 @@ function initEverything() {
     var createReminder = function (id, content) {
         var courseItem = '<li id="' + id + '">' + content + '</li>',
           list = $('.reminders li');
-
+        
 
         if (!$('#' + id).length) {
 
@@ -96,7 +98,9 @@ function initEverything() {
             var courseName = input.val();
             event.preventDefault();
             if (courseName) {
-                createReminder(courseName.replace(/\s|[.]|[:]|[-]/g, ''), courseName);
+                var genId = ID();
+                itemToDivId[courseName] = genId;
+                createReminder(genId , courseName);
                 input.val('');
             }
         });
@@ -106,8 +110,8 @@ function initEverything() {
         chrome.storage.sync.get('courselist', function (result) {
             var items = result.courselist;
             console.debug(items);
-            for (var item in items) {
-                createReminder(items[item].replace(/\s|[.]|[:]|[-]/g, ''), items[item]);
+            for (var item in items) { 
+                createReminder(itemToDivId[items[item]], items[item]);
             }
         });
     };
@@ -129,6 +133,13 @@ function onAddBtnClick(params) {
     saveCourse(typedCourse);
 
 }
+
+var ID = function () {
+    // Math.random should be unique because of its seeding algorithm.
+    // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+    // after the decimal.
+    return '_' + Math.random().toString(36).substr(2, 9);
+  };
 
 function saveCourse(courseName) {
     var courselist = [];
