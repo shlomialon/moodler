@@ -25,7 +25,7 @@ export default {
         chrome.storage.sync.get('courselist', function (result) {
             const courses = result.courselist || [];
             if (courses.indexOf(typeBox) === -1) {
-                courses.push(typeBox);
+                courses.unshift(typeBox);
             }
 
             chrome.storage.sync.set({'courselist': courses}, function () {
