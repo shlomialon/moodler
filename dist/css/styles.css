@@ -1,3 +1,5 @@
+@import "http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css";
+
 @import url(http://fonts.googleapis.com/css?family=Lato:300,100,400);
 
 footer {
@@ -17,6 +19,23 @@ footer {
     list-style: none;
     outline: 1px solid transparent;
 }
+
+
+
+html {
+    height: 100%;
+    position: relative
+}
+
+body {
+    background-color: #3498db;
+    font-family: "Lato", sans-serif;
+    height: 2000px;
+    color: white
+}
+
+
+
 
 li [class^=icon-],
 li [class*=" icon-"] {
@@ -43,13 +62,6 @@ li [class*=" icon-"] {
     color: rgba(255, 255, 255, 0.2)
 }
 
-html, body {
-    height: 100%;
-}
-
-body {
-    background-color: #eee;
-}
 
 .page-header {
     width: 100%;
@@ -235,7 +247,7 @@ button .icon-trash {
 
 .reminders {
     list-style-type: none;
-    max-width: 500px;
+    max-width: 97%;
     margin: 30px auto
 }
 
@@ -253,7 +265,7 @@ button .icon-trash {
     padding: 10px;
     padding-right: 60px;
     position: relative;
-    opacity: 0;
+    opacity: 1;
     word-wrap: break-word;
     -webkit-transition: all .1s ease;
     -o-transition: all .1s ease;

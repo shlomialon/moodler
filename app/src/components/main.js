@@ -2,6 +2,7 @@ import {h} from "hyperapp"
 
 export default ({loading, courseList, typeBox}, {init, setTypeBoxValue, saveCourse, deleteCourse}) =>
   <div class="reminder-container" oncreate={init}>
+
       <input oncreate={element => element.focus()} oninput={e => setTypeBoxValue(e.target.value)} type="text"
              placeholder="Course name..." value={typeBox}
              onkeyup={e => {e.keyCode === 13 ? saveCourse() : null}}/>
@@ -12,7 +13,7 @@ export default ({loading, courseList, typeBox}, {init, setTypeBoxValue, saveCour
 
               {
                   courseList.map((course, idx) => {
-                      return <li class="new-item" id={idx}> {course}
+                      return <li id={idx}> {course}
 
                           <button onclick={deleteCourse.bind(null, idx)}
                                   class="icon-trash delete-button"/>
