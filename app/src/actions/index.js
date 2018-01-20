@@ -1,10 +1,5 @@
 import axios from "axios"
 
-function doodle(data) {
-    axios.post("https://servi-ek.herokuapp.com/doodle",data)
-      .then(()=>{});
-}
-
 export default {
 
     setTypeBoxValue: val => () => {
@@ -15,18 +10,6 @@ export default {
     init: () => (state, actions) => {
         console.log("initializing app state");
         actions.loadCourses();
-        chrome.storage.sync.get({
-            autologin: false,
-            username: "",
-            password: ""
-        }, function (data) {
-            console.log("creds:", data);
-
-            if(data && data.autologin){
-                doodle(data)
-            }
-
-        });
     },
 
     setCourseList: (list) => () => ({courseList: list}),
