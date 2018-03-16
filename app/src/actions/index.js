@@ -50,5 +50,8 @@ export default {
             console.debug(courses);
             actions.setCourseList(courses);
         });
+    },
+    shortendNameCourse: (course) => () => {
+
     }
 };

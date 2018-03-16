@@ -1,6 +1,6 @@
 import {h} from "hyperapp"
 
-export default ({loading, courseList, typeBox}, {init, setTypeBoxValue, saveCourse, deleteCourse}) =>
+export default ({loading, courseList, typeBox}, {init, setTypeBoxValue, saveCourse, deleteCourse, shortendNameCourse}) =>
     <div className={"reminder-container"} oncreate={init}>
         <div className={"row"}>
             <center>
@@ -17,19 +17,26 @@ export default ({loading, courseList, typeBox}, {init, setTypeBoxValue, saveCour
         <div className={"container"}>
             <ul>{
                 courseList.map((course, idx) => {
-                    return<div className={"row"} id={idx}>
-                            <div className={"one-third column"}>
-                                <button onclick={deleteCourse.bind(null, idx)}
-                                        className={"icon-trash delete-button"}>הסר
-                                </button>
-                            </div>
-                        <div className={"two-thirds column"}><a class="course">{course}</a></div>
+                    let shortenedName;
+                    if (course.length >= 55) {
+                        shortenedName = course.slice(0, 55) + "..."
+                    }
+                    else {
+                        shortenedName = course
+                    }
+                    return <div className={"row"} id={idx}>
+                        <div className={"one-third column"}>
+                            <button onclick={deleteCourse.bind(null, idx)}
+                                    className={"icon-trash delete-button"}>הסר
+                            </button>
                         </div>
+                        <div className={"two-thirds column"}><a class="course">{shortenedName}</a></div>
+                    </div>
                 })
             }
-            {
-                !courseList.length ? <h3>No courses added yet.</h3> : null
-            }
+                <center>
+                    {!courseList.length ? <h3>לא הוספו קורסים לרשימה.</h3> : null}
+                </center>
             </ul>
         </div>
     </div>
