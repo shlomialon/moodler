@@ -30,7 +30,7 @@ export default ({loading, courseList, typeBox}, {init, setTypeBoxValue, saveCour
                                     className={"icon-trash delete-button"}>הסר
                             </button>
                         </div>
-                        <div className={"two-thirds column"}><a class="course">{shortenedName}</a></div>
+                        <div className={"two-thirds column"}><a className={"course"}>{shortenedName}</a></div>
                     </div>
                 })
             }
