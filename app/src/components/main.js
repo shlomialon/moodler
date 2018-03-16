@@ -1,7 +1,7 @@
 import {h} from "hyperapp"
 
 export default ({loading, courseList, typeBox}, {init, setTypeBoxValue, saveCourse, deleteCourse}) =>
-    <div class="reminder-container" oncreate={init}>
+    <div className={"reminder-container"} oncreate={init}>
         <div className={"row"}>
             <center>
                 <input oncreate={element => element.focus()} oninput={e => setTypeBoxValue(e.target.value)} type="text"
@@ -14,23 +14,22 @@ export default ({loading, courseList, typeBox}, {init, setTypeBoxValue, saveCour
                 </input>
             </center>
         </div>
-        <div class="container">
+        <div className={"container"}>
             <ul>{
                 courseList.map((course, idx) => {
-                    return <div class="row" id={idx}>
-                        <div class="one-third column">
-                            <button onclick={deleteCourse.bind(null, idx)}
-                                    class="icon-trash delete-button">הסר
-                            </button>
+                    return<div className={"row"} id={idx}>
+                            <div className={"one-third column"}>
+                                <button onclick={deleteCourse.bind(null, idx)}
+                                        className={"icon-trash delete-button"}>הסר
+                                </button>
+                            </div>
+                        <div className={"two-thirds column"}><a class="course">{course}</a></div>
                         </div>
-                        <div class="two-thirds column">{course}</div>
-
-                    </div>
                 })
             }
-                {
-                    !courseList.length ? <h3>No courses added yet.</h3> : null
-                }
+            {
+                !courseList.length ? <h3>No courses added yet.</h3> : null
+            }
             </ul>
         </div>
     </div>
